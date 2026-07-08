@@ -170,6 +170,30 @@ export const EDUCATION = [
 
 export const CERTIFICATIONS = [
   {
+    name: "AI ASCEND 2026",
+    issuer: "Saveetha Engineering College (powered by Kyndryl & AWS)",
+    date: "2026",
+    link: "/certificates/saveetha_ai_ascend.jpg",
+  },
+  {
+    name: "Introduction to Cybersecurity",
+    issuer: "Cisco Networking Academy (offered by NIIT Foundation)",
+    date: "July 2025",
+    link: "/certificates/cisco_niit_cybersecurity.jpg",
+  },
+  {
+    name: "Low Code No Code Development",
+    issuer: "YHills",
+    date: "February 2025",
+    link: "/certificates/yhills_low_code_no_code.jpg",
+  },
+  {
+    name: "Software Engineering",
+    issuer: "Infosys Springboard",
+    date: "July 2024",
+    link: "/certificates/infosys_software_engineering.jpg",
+  },
+  {
     name: "Journey to Cloud: Envisioning Your Solution",
     issuer: "IBM SkillsBuild",
     date: "July 2025",
@@ -196,12 +220,14 @@ export const CERTIFICATIONS = [
 ];
 
 export const ACHIEVEMENTS = [
-  { title: "Hackathon Winner", detail: "Won a 24-hour national-level hackathon for an AI accessibility project." },
-  { title: "NCC Cadet", detail: "Participated in NCC with leadership and camp certifications." },
-  { title: "Sports", detail: "Represented college in inter-collegiate tournaments." },
-  { title: "Coding Contest", detail: "Top 5% in multiple competitive programming contests." },
-  { title: "Research Paper", detail: "Co-authored an undergraduate research paper on ML applications." },
-  { title: "Tech Lead", detail: "Led a student developer club with 100+ members." },
+  {
+    title: "NCC Cadet",
+    detail: "Represented the Karnataka & Goa Directorate at the National Level NCC Idea Innovation Camp held in Vijayawada, Andhra Pradesh. Developed and presented an innovative Women Safety App, demonstrating innovation, problem-solving, leadership, and technical presentation skills.",
+  },
+  {
+    title: "Sports",
+    detail: "Represented Bangalore North thrice in state level and Mangalore SJEC once. Floorball state winners (represented Bangalore North, led the winning team, and led SJEC team to states). Represented SJEC at the state level in athletics and cross country.",
+  },
 ];
 
 export const LEARNING = [
