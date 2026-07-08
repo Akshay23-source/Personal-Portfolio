@@ -26,7 +26,7 @@ import {
   Activity,
   Cpu,
 } from "lucide-react";
-// avatar import removed — hero section no longer uses an image
+import avatar from "../../assets/avatar.jpg";
 import {
   NAV,
   CONTACT,
@@ -273,7 +273,7 @@ const wordReveal = {
 };
 const wordChild = {
   hidden: { opacity: 0, y: 20, filter: "blur(6px)" },
-  visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+  visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const } },
 };
 
 function Section({
@@ -285,51 +285,55 @@ function Section({
 }: {
   id: string;
   eyebrow?: string;
-  title: string;
+  title?: string;
   subtitle?: string;
   children: React.ReactNode;
 }) {
-  const words = title.split(" ");
+  const words = title ? title.split(" ") : [];
   return (
     <section id={id} className="relative scroll-mt-24 py-24 sm:py-28">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="mx-auto mb-14 max-w-2xl text-center">
-          {eyebrow && (
-            <motion.span
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="mb-3 inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-3 py-1 text-xs font-medium text-brand"
-            >
-              <Sparkles size={12} /> {eyebrow}
-            </motion.span>
-          )}
-          <motion.h2
-            variants={wordReveal}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-            className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl"
-          >
-            {words.map((w, i) => (
-              <motion.span key={i} variants={wordChild} className="mr-[0.3em] inline-block">
-                {w}
+        {(eyebrow || title || subtitle) && (
+          <div className="mx-auto mb-14 max-w-2xl text-center">
+            {eyebrow && (
+              <motion.span
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="mb-3 inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-3 py-1 text-xs font-medium text-brand"
+              >
+                <Sparkles size={12} /> {eyebrow}
               </motion.span>
-            ))}
-          </motion.h2>
-          {subtitle && (
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="mt-4 text-muted-foreground"
-            >
-              {subtitle}
-            </motion.p>
-          )}
-        </div>
+            )}
+            {title && (
+              <motion.h2
+                variants={wordReveal}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl"
+              >
+                {words.map((w, i) => (
+                  <motion.span key={i} variants={wordChild} className="mr-[0.3em] inline-block">
+                    {w}
+                  </motion.span>
+                ))}
+              </motion.h2>
+            )}
+            {subtitle && (
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="mt-4 text-muted-foreground"
+              >
+                {subtitle}
+              </motion.p>
+            )}
+          </div>
+        )}
         {children}
       </div>
     </section>
@@ -344,12 +348,12 @@ const heroStagger = {
 };
 const heroFadeUp = {
   hidden: { opacity: 0, y: 30, filter: "blur(8px)" },
-  visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
+  visible: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const } },
 };
 
-function RollingButton({ href, children, className, icon }: { href: string; children: string; className: string; icon?: React.ReactNode }) {
+function RollingButton({ href, children, className, icon, download, target }: { href: string; children: string; className: string; icon?: React.ReactNode; download?: string | boolean; target?: string }) {
   return (
-    <a href={href} className={`btn-roll rounded-xl px-5 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5 ${className}`}>
+    <a href={href} download={download} target={target} className={`btn-roll rounded-xl px-5 py-3 text-sm font-semibold transition-transform hover:-translate-y-0.5 ${className}`}>
       {icon}
       <span className="btn-roll-text">
         <span>{children}</span>
@@ -396,12 +400,7 @@ function Hero() {
             ))}
           </motion.h1>
 
-          <motion.div variants={heroFadeUp} className="mt-6 flex justify-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-brand/30 bg-brand/10 px-4 py-1.5 text-xs font-semibold text-brand tracking-wide">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-brand" />
-              Available for role - Cybersecurity, AIML, Cloud, SWE
-            </span>
-          </motion.div>
+
 
           <motion.p variants={heroFadeUp} className="mt-6 mx-auto max-w-xl text-base text-muted-foreground sm:text-lg">
             I build intelligent, scalable, and user-centric applications that
@@ -418,7 +417,9 @@ function Hero() {
               View Projects
             </RollingButton>
             <RollingButton
-              href="#"
+              href="/resume.pdf"
+              download="Akshay_Gabrieal_R_Resume.pdf"
+              target="_blank"
               className="border border-border bg-white/5 text-foreground backdrop-blur-md hover:border-brand/40 hover:bg-white/10"
               icon={<Download size={16} />}
             >
@@ -507,40 +508,55 @@ function StatCard({ value, label, delay }: { value: number; label: string; delay
 
 function About() {
   return (
-    <Section
-      id="about"
-      eyebrow="About"
-      title="Engineer, builder, continuous learner"
-      subtitle="Computer Science Engineering graduate focused on building thoughtful software."
-    >
-      <div className="mx-auto max-w-4xl">
+    <Section id="about" eyebrow="About">
+      <div className="mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
-          className="glass rounded-3xl p-8"
+          className="glass rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden"
         >
-          <p className="text-lg leading-relaxed text-muted-foreground">
-            I'm a <span className="text-foreground font-semibold">Computer Science Engineering</span> graduate who loves turning messy, real-world problems into clean, useful software. I care about craft, product thinking, and building things that people actually use.
-          </p>
-          <p className="mt-4 leading-relaxed text-muted-foreground">
-            My focus areas are <span className="text-foreground">AI &amp; ML</span>, <span className="text-foreground">cloud computing</span>, <span className="text-foreground">software engineering</span>, and <span className="text-foreground">cybersecurity</span>. I enjoy going deep on system design, poking at network internals, and figuring out how to make ML actually work in production.
-          </p>
-          <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            {[
-              { icon: <Brain size={16} />, label: "Curious about AI, LLMs and agents" },
-              { icon: <Code2 size={16} />, label: "Loves clean code and DX" },
-              { icon: <Shield size={16} />, label: "Security-first mindset" },
-              { icon: <Rocket size={16} />, label: "Builds and iterates fast" },
-            ].map((v) => (
-              <div key={v.label} className="flex items-center gap-3 rounded-xl border border-border/60 bg-white/5 px-3 py-2 text-sm">
-                <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand/15 text-brand">
-                  {v.icon}
-                </span>
-                {v.label}
+          {/* Subtle background glow effect inside the card */}
+          <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-brand/10 blur-[80px] pointer-events-none animate-pulse-glow" />
+          <div className="absolute -left-20 -bottom-20 h-60 w-60 rounded-full bg-brand-violet/10 blur-[80px] pointer-events-none" />
+
+          <div className="grid gap-8 lg:grid-cols-[1fr_1.8fr] items-center relative z-10">
+            {/* Image side with border glow effects */}
+            <div className="relative group mx-auto w-full max-w-[280px] lg:max-w-none aspect-square rounded-2xl overflow-hidden shadow-2xl">
+              {/* Outer gradient glow line */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-brand via-brand-accent to-brand-violet opacity-75 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl blur-[2px] p-[2px]">
+                <div className="absolute inset-0 bg-background rounded-[14px]" />
               </div>
-            ))}
+              
+              {/* Shimmer sweep effect */}
+              <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden rounded-2xl">
+                <div className="absolute w-[200%] h-[200%] top-[-50%] left-[-50%] bg-[linear-gradient(45deg,transparent_45%,rgba(255,255,255,0.15)_50%,transparent_55%)] transform -translate-x-full group-hover:animate-[shimmer-sweep_0.8s_ease-out_forwards]" />
+              </div>
+              
+              {/* The profile photo */}
+              <motion.img
+                src={avatar}
+                alt="Akshay Gabrieal R"
+                className="relative z-0 w-full h-full object-cover rounded-[14px] transition-transform duration-500 group-hover:scale-105"
+              />
+              
+              {/* Soft dark vignette gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-300 pointer-events-none rounded-2xl" />
+            </div>
+
+            {/* High-impact copy text */}
+            <div className="space-y-6">
+              <p className="text-xl md:text-2xl leading-relaxed text-muted-foreground font-light">
+                I'm a <span className="text-gradient font-semibold font-display">Computer Science Engineering student</span> passionate about building software that solves real-world problems. I enjoy transforming ideas into practical applications while continuously learning modern technologies.
+              </p>
+              <p className="text-lg md:text-xl leading-relaxed text-muted-foreground">
+                My interests include <span className="text-foreground font-semibold">Software Engineering</span>, <span className="text-foreground font-semibold">Artificial Intelligence</span>, <span className="text-foreground font-semibold">Machine Learning</span>, <span className="text-foreground font-semibold">Cloud Computing</span>, <span className="text-brand-accent font-semibold">Generative AI</span>, and <span className="text-foreground font-semibold">Cybersecurity</span>. I'm currently exploring <span className="text-brand-violet font-semibold">LLMs</span>, <span className="text-brand font-semibold">AI Agents</span>, and scalable application development using modern AI Tools to build intelligent and production-ready solutions.
+              </p>
+              <p className="text-lg md:text-xl leading-relaxed text-muted-foreground">
+                Beyond academics, I enjoy participating in innovation challenges and building projects that combine AI with real-world impact. As a <span className="text-foreground font-semibold">professional hockey player</span> and <span className="text-foreground font-semibold">NCC cadet</span>, I've developed discipline, leadership, teamwork, resilience, and a strong work ethic—qualities that shape how I approach both engineering and continuous learning.
+              </p>
+            </div>
           </div>
         </motion.div>
       </div>

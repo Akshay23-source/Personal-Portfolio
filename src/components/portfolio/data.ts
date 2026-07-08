@@ -99,7 +99,7 @@ export const PROJECTS: Project[] = [
     challenges: "Integrating Supabase Row-Level Security policies with nested user roles, and structuring clean PDF documents dynamically.",
     learnings: "Working with TanStack Start SSR routing engine, handling client-side QR verification, and implementing interactive WebAudio synthesizers.",
     github: "https://github.com/Akshay23-source/Student-Information-System",
-    demo: "https://student-information-system-akshay23.vercel.app",
+    demo: "https://student-information-system-rho-ten.vercel.app/login",
     gradient: "from-blue-500 via-indigo-500 to-violet-500",
   },
   {
@@ -148,7 +148,7 @@ export const EDUCATION = [
   {
     title: "Bachelor of Engineering (B.Tech) — Computer Science & Engineering",
     org: "St Joseph Engineering College, Mangalore",
-    duration: "2022 — 2026",
+    duration: "2022 — Ongoing",
     detail: "",
     courses: ["Data Structures", "Algorithms", "Operating Systems", "DBMS", "Machine Learning", "Computer Networks", "Cybersecurity"],
   },
@@ -174,6 +174,12 @@ export const CERTIFICATIONS = [
     issuer: "Saveetha Engineering College (powered by Kyndryl & AWS)",
     date: "2026",
     link: "/certificates/saveetha_ai_ascend.jpg",
+  },
+  {
+    name: "Cybersecurity Essentials",
+    issuer: "Cisco Networking Academy (offered by NIIT Foundation)",
+    date: "August 2025",
+    link: "/certificates/cisco_cybersecurity_essentials.jpg",
   },
   {
     name: "Introduction to Cybersecurity",
