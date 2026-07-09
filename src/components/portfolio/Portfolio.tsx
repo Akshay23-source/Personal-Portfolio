@@ -1033,14 +1033,11 @@ function Learning() {
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.45, delay: i * 0.05 }}
             whileHover={{ y: -4, scale: 1.02 }}
-            className="glass card-glow group rounded-2xl p-5 relative overflow-hidden"
+            className="glass card-glow group rounded-2xl p-5 relative overflow-hidden flex items-center justify-center text-center min-h-[72px]"
           >
-            <div className="flex items-center justify-between relative z-10">
-              <h3 className="text-base font-semibold transition-colors group-hover:text-brand-accent">{l.name}</h3>
-              <span className="text-xs font-semibold text-muted-foreground group-hover:text-brand transition-colors">
-                {l.progress}% Completed
-              </span>
-            </div>
+            <h3 className="text-base font-semibold transition-colors group-hover:text-brand-accent relative z-10">
+              {l.name}
+            </h3>
           </motion.div>
         ))}
       </div>
