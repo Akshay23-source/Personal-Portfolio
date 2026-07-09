@@ -124,42 +124,44 @@ function ScrollProgress() {
 }
 
 function BackgroundFX() {
-  // Generate deterministic star positions
-  const stars = useMemo(() =>
-    Array.from({ length: 60 }, (_, i) => ({
-      left: `${(i * 17.3 + 11) % 100}%`,
-      top: `${(i * 23.7 + 7) % 100}%`,
-      size: i % 3 === 0 ? 3 : i % 2 === 0 ? 2 : 1,
-      dur: `${3 + (i % 5) * 1.2}s`,
-      delay: `${(i * 0.37) % 5}s`,
+  const snowflakes = useMemo(() =>
+    Array.from({ length: 45 }, (_, i) => ({
+      left: `${(i * 17.3 + 7) % 100}%`,
+      size: (i % 3 === 0 ? 4 : i % 2 === 0 ? 3 : 2) + Math.random() * 2,
+      dur: `${8 + (i % 4) * 3}s`,
+      delay: `${-(i * 0.45) % 10}s`,
+      drift: `${(i % 2 === 0 ? 25 : -25) + (i % 5) * 4}px`,
+      opacity: 0.3 + (i % 5) * 0.1,
     })), []);
 
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      {/* Starfield */}
-      <div className="starfield">
-        {stars.map((s, i) => (
+      {/* Snowflakes */}
+      <div className="absolute inset-0">
+        {snowflakes.map((s, i) => (
           <span
             key={i}
-            className="star"
+            className="absolute rounded-full bg-white shadow-[0_0_4px_rgba(255,255,255,0.6)] animate-snowfall"
             style={{
               left: s.left,
-              top: s.top,
-              width: s.size,
-              height: s.size,
+              width: `${s.size}px`,
+              height: `${s.size}px`,
+              top: '-15px',
               ['--dur' as string]: s.dur,
               ['--delay' as string]: s.delay,
+              ['--drift' as string]: s.drift,
+              ['--opacity' as string]: s.opacity,
             }}
           />
         ))}
       </div>
       {/* Grid */}
-      <div className="bg-grid absolute inset-0 opacity-30" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_20%,var(--background)_75%)]" />
+      <div className="bg-grid absolute inset-0 opacity-[0.04]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,transparent_30%,var(--background)_80%)]" />
       {/* Aurora blobs */}
-      <div className="animate-aurora absolute -top-40 -left-40 h-[500px] w-[700px] rounded-full bg-brand/20 blur-[100px]" />
-      <div className="animate-aurora absolute top-1/3 -right-40 h-[500px] w-[700px] rounded-full bg-brand-violet/20 blur-[100px] [animation-delay:3s]" />
-      <div className="animate-aurora absolute bottom-0 left-1/4 h-[400px] w-[600px] rounded-full bg-brand-accent/15 blur-[100px] [animation-delay:6s]" />
+      <div className="animate-aurora absolute -top-40 -left-40 h-[500px] w-[700px] rounded-full bg-brand/8 blur-[100px]" />
+      <div className="animate-aurora absolute top-1/3 -right-40 h-[500px] w-[700px] rounded-full bg-brand-violet/5 blur-[100px] [animation-delay:3s]" />
+      <div className="animate-aurora absolute bottom-0 left-1/4 h-[400px] w-[600px] rounded-full bg-brand-accent/5 blur-[100px] [animation-delay:6s]" />
     </div>
   );
 }
