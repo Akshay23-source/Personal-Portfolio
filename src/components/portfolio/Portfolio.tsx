@@ -26,7 +26,6 @@ import {
   Activity,
   Cpu,
 } from "lucide-react";
-import avatar from "../../assets/avatar.jpg";
 import {
   NAV,
   CONTACT,
@@ -509,7 +508,7 @@ function StatCard({ value, label, delay }: { value: number; label: string; delay
 function About() {
   return (
     <Section id="about" eyebrow="About">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -521,42 +520,17 @@ function About() {
           <div className="absolute -right-20 -top-20 h-60 w-60 rounded-full bg-brand/10 blur-[80px] pointer-events-none animate-pulse-glow" />
           <div className="absolute -left-20 -bottom-20 h-60 w-60 rounded-full bg-brand-violet/10 blur-[80px] pointer-events-none" />
 
-          <div className="grid gap-8 lg:grid-cols-[1fr_1.8fr] items-center relative z-10">
-            {/* Image side with border glow effects */}
-            <div className="relative group mx-auto w-full max-w-[280px] lg:max-w-none aspect-square rounded-2xl overflow-hidden shadow-2xl">
-              {/* Outer gradient glow line */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-brand via-brand-accent to-brand-violet opacity-75 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl blur-[2px] p-[2px]">
-                <div className="absolute inset-0 bg-background rounded-[14px]" />
-              </div>
-              
-              {/* Shimmer sweep effect */}
-              <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden rounded-2xl">
-                <div className="absolute w-[200%] h-[200%] top-[-50%] left-[-50%] bg-[linear-gradient(45deg,transparent_45%,rgba(255,255,255,0.15)_50%,transparent_55%)] transform -translate-x-full group-hover:animate-[shimmer-sweep_0.8s_ease-out_forwards]" />
-              </div>
-              
-              {/* The profile photo */}
-              <motion.img
-                src={avatar}
-                alt="Akshay Gabrieal R"
-                className="relative z-0 w-full h-full object-cover rounded-[14px] transition-transform duration-500 group-hover:scale-105"
-              />
-              
-              {/* Soft dark vignette gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-300 pointer-events-none rounded-2xl" />
-            </div>
-
-            {/* High-impact copy text */}
-            <div className="space-y-6">
-              <p className="text-xl md:text-2xl leading-relaxed text-muted-foreground font-light">
-                I'm a <span className="text-gradient font-semibold font-display">Computer Science Engineering student</span> passionate about building software that solves real-world problems. I enjoy transforming ideas into practical applications while continuously learning modern technologies.
-              </p>
-              <p className="text-lg md:text-xl leading-relaxed text-muted-foreground">
-                My interests include <span className="text-foreground font-semibold">Software Engineering</span>, <span className="text-foreground font-semibold">Artificial Intelligence</span>, <span className="text-foreground font-semibold">Machine Learning</span>, <span className="text-foreground font-semibold">Cloud Computing</span>, <span className="text-brand-accent font-semibold">Generative AI</span>, and <span className="text-foreground font-semibold">Cybersecurity</span>. I'm currently exploring <span className="text-brand-violet font-semibold">LLMs</span>, <span className="text-brand font-semibold">AI Agents</span>, and scalable application development using modern AI Tools to build intelligent and production-ready solutions.
-              </p>
-              <p className="text-lg md:text-xl leading-relaxed text-muted-foreground">
-                Beyond academics, I enjoy participating in innovation challenges and building projects that combine AI with real-world impact. As a <span className="text-foreground font-semibold">professional hockey player</span> and <span className="text-foreground font-semibold">NCC cadet</span>, I've developed discipline, leadership, teamwork, resilience, and a strong work ethic—qualities that shape how I approach both engineering and continuous learning.
-              </p>
-            </div>
+          {/* Centered High-impact copy text */}
+          <div className="space-y-6 relative z-10">
+            <p className="text-xl md:text-2xl leading-relaxed text-muted-foreground font-light">
+              I'm a <span className="text-gradient font-semibold font-display">Computer Science Engineering student</span> passionate about building software that solves real-world problems. I enjoy transforming ideas into practical applications while continuously learning modern technologies.
+            </p>
+            <p className="text-lg md:text-xl leading-relaxed text-muted-foreground">
+              My interests include <span className="text-foreground font-semibold">Software Engineering</span>, <span className="text-foreground font-semibold">Artificial Intelligence</span>, <span className="text-foreground font-semibold">Machine Learning</span>, <span className="text-foreground font-semibold">Cloud Computing</span>, <span className="text-brand-accent font-semibold">Generative AI</span>, and <span className="text-foreground font-semibold">Cybersecurity</span>. I'm currently exploring <span className="text-brand-violet font-semibold">LLMs</span>, <span className="text-brand font-semibold">AI Agents</span>, and scalable application development using modern AI Tools to build intelligent and production-ready solutions.
+            </p>
+            <p className="text-lg md:text-xl leading-relaxed text-muted-foreground">
+              Beyond academics, I enjoy participating in innovation challenges and building projects that combine AI with real-world impact. As a <span className="text-foreground font-semibold">professional hockey player</span> and <span className="text-foreground font-semibold">NCC cadet</span>, I've developed discipline, leadership, teamwork, resilience, and a strong work ethic—qualities that shape how I approach both engineering and continuous learning.
+            </p>
           </div>
         </motion.div>
       </div>
