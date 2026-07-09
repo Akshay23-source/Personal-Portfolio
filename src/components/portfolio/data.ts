@@ -148,7 +148,7 @@ export const EDUCATION = [
   {
     title: "Bachelor of Engineering (B.Tech) — Computer Science & Engineering",
     org: "St Joseph Engineering College, Mangalore",
-    duration: "2022 — Ongoing",
+    duration: "2023 — Ongoing",
     detail: "",
     courses: ["Data Structures", "Algorithms", "Operating Systems", "DBMS", "Machine Learning", "Computer Networks", "Cybersecurity"],
   },
